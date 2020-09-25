@@ -62,7 +62,10 @@ namespace HarcosProjekt
 
             }
         }
-        //public void Gyogyul() {}
+        public void Gyogyul() {
+            if (this.Eletero == 0) { this.Eletero = MaxEletero; }
+            else { this.Eletero = 3 + Szint; }
+        }
         public override string ToString()
         {
             return String.Format("{0} – LVL:{1} – EXP: {2}/{3} – HP:{4}/{5} – DMG: {6}",
