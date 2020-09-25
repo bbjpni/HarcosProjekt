@@ -33,6 +33,7 @@ namespace HarcosProjekt
                 this.alapEletero = 15;
                 this.alapSebzes = 3;
             }
+            this.alapEletero = MaxEletero;
         }
 
         public string Nev { get => nev; set => nev = value; }
@@ -44,10 +45,11 @@ namespace HarcosProjekt
         public int MaxEletero { get => alapEletero + szint * 3; }
         //public void Megkuzd(Harcos masikHarcos) {}
         //public void Gyogyul() {}
-        //public override string ToString()
-        //{
-        //    return base.ToString();
-        //}
+        public override string ToString()
+        {
+            return String.Format("{0}\n – LVL:{1}\n – EXP: {2}/{3}\n – HP:{4}/{5}\n – DMG: {6}",
+                this.nev, this.szint, this.tapasztalat, Szintlepeshez,alapEletero, MaxEletero, Sebzes);
+        }
 
     }
 }
