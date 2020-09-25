@@ -15,7 +15,24 @@ namespace HarcosProjekt
 
         public Harcos(string nev, int statuszSablon)
         {
-            this.Nev = nev;
+            this.nev = nev;
+            this.szint = 1;
+            this.tapasztalat = 0;
+            if (statuszSablon == 3)
+            {
+                this.alapEletero = 8;
+                this.alapSebzes = 5;
+            }
+            else if (statuszSablon == 2)
+            {
+                this.alapEletero = 12;
+                this.alapSebzes = 4;
+            }
+            else
+            {
+                this.alapEletero = 15;
+                this.alapSebzes = 3;
+            }
         }
 
         public string Nev { get => nev; set => nev = value; }
