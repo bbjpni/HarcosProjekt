@@ -43,11 +43,29 @@ namespace HarcosProjekt
         public int Sebzes { get => alapSebzes + szint; }
         public int Szintlepeshez { get => 10 + szint * 5; }
         public int MaxEletero { get => alapEletero + szint * 3; }
-        //public void Megkuzd(Harcos masikHarcos) {}
+        public void Megkuzd(Harcos masikHarcos) {
+            if (this == masikHarcos)
+            {
+                Console.WriteLine("A két harcos azonos");
+            }
+
+            if (this.Eletero == 0 || masikHarcos.Eletero == 0)
+            {
+                Console.WriteLine("A Harcos életereje 0");
+            }
+            else
+            {
+                masikHarcos.Eletero -= this.Sebzes;
+                if (masikHarcos.Eletero>0){ this.Eletero -= masikHarcos.Sebzes; }
+                masikHarcos.Tapasztalat += masikHarcos.Eletero == 0 ? 0 : (this.Eletero == 0) ? 15 : 10;
+                this.Tapasztalat += this.Eletero == 0 ? 0 : (masikHarcos.Eletero == 0) ? 15 : 10;
+
+            }
+        }
         //public void Gyogyul() {}
         public override string ToString()
         {
-            return String.Format("{0}\n – LVL:{1}\n – EXP: {2}/{3}\n – HP:{4}/{5}\n – DMG: {6}",
+            return String.Format("{0} – LVL:{1} – EXP: {2}/{3} – HP:{4}/{5} – DMG: {6}",
                 this.nev, this.szint, this.tapasztalat, Szintlepeshez, this.alapEletero, MaxEletero, Sebzes);
         }
 
