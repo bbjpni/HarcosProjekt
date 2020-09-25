@@ -37,9 +37,35 @@ namespace HarcosProjekt
         }
 
         public string Nev { get => nev; set => nev = value; }
-        public int Szint { get => szint; set => szint = value; }
-        public int Tapasztalat { get => tapasztalat; set => tapasztalat = value; }
-        public int Eletero { get => eletero; set => eletero = value; }
+        public int Szint { 
+            get => szint;
+            set
+            {
+                if (this.tapasztalat >= this.Szintlepeshez)
+                {
+                    this.tapasztalat -= this.Szintlepeshez;
+                    this.eletero = this.MaxEletero;
+                    this.szint = value;
+                }
+            }
+        }
+        public int Tapasztalat {
+            get => tapasztalat;
+            set {
+                if (Szintlepeshez <= this.tapasztalat)
+                {
+                    Szint++;
+                }
+            }
+        }
+        public int Eletero {
+            get => eletero;
+            set
+            {
+                if (this.Eletero == 0){ this.tapasztalat = 0; }
+                else if (this.Eletero > this.MaxEletero) { this.Eletero = this.MaxEletero; }
+            }
+        }
         public int Sebzes { get => alapSebzes + szint; }
         public int Szintlepeshez { get => 10 + szint * 5; }
         public int MaxEletero { get => alapEletero + szint * 3; }
