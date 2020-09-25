@@ -48,7 +48,7 @@ namespace HarcosProjekt
         public override string ToString()
         {
             return String.Format("{0}\n – LVL:{1}\n – EXP: {2}/{3}\n – HP:{4}/{5}\n – DMG: {6}",
-                this.nev, this.szint, this.tapasztalat, Szintlepeshez,alapEletero, MaxEletero, Sebzes);
+                this.nev, this.szint, this.tapasztalat, Szintlepeshez, this.alapEletero, MaxEletero, Sebzes);
         }
 
     }
