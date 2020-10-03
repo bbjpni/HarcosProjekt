@@ -51,17 +51,38 @@ namespace HarcosProjekt
                 Console.WriteLine("a.) Megküzdeni egy harcossal\nb.) Gyógyulni\nc.) Kilépni");
                 Console.Write("\nMit szeretne tenni?\nÜsse le a megfelelő billentyűt: ");
                 billentyu = Console.ReadKey();
-                Console.WriteLine("\n");
-            } while (!(billentyu.Key == ConsoleKey.A || billentyu.Key == ConsoleKey.B || billentyu.Key == ConsoleKey.C));
+                if (billentyu.Key == ConsoleKey.A)
+                {
+                    Console.Clear();
+                    Kiir();
+                    int szam = -1;
+                    do
+                    {
+                        Console.Write("Kivel akarsz megmérkőzni?\nAdd meg a sorszámát: ");
+                        bool next = Int32.TryParse(Console.ReadLine(), out szam);
+                        if (szam < 1 || szam > tagok.Count + 1 && next)
+                        {
+                            Console.WriteLine("Nincs ilyen sorszám.\n");
+                        }
+                    } while (!(szam > 0 && szam<tagok.Count+1));
+                    Console.ReadKey();
+                    tagok[tagok.Count - 1].Megkuzd(tagok[szam-1]);
+                    Kiir();
+                }
+                else if (billentyu.Key == ConsoleKey.B)
+                {
+                    Console.Clear();
+                }
+                else if(billentyu.Key != ConsoleKey.C)
+                {
+                    Console.WriteLine("\nNem megfelelő billentyút ütötte le!!\n");
+                }
+            } while (billentyu.Key != ConsoleKey.C);
 
-            if (billentyu.Key == ConsoleKey.A)
-            {
-                Kiir();
-            }
         }
         static void Main(string[] args)
         {
-            tagok = new List<Harcos>() { new Harcos("ZOLTÁÁN", 2), new Harcos("OSzablcs", 1), new Harcos("Zsombor", 3) };
+            tagok = new List<Harcos>() { new Harcos("ZOLTÁÁN", 2), new Harcos("OSzabolcs", 1), new Harcos("Zsombor", 3) };
             Beolvas("harcosok.csv");
             Kiir();
             tagok.Add(userCreat());

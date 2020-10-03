@@ -37,39 +37,46 @@ namespace HarcosProjekt
         }
 
         public string Nev { get => nev; set => nev = value; }
-        public int Szint { 
+        public int Szint
+        {
             get => szint;
             set
             {
                 if (this.tapasztalat >= this.Szintlepeshez)
                 {
                     this.tapasztalat -= this.Szintlepeshez;
-                    this.eletero = this.MaxEletero;
                     this.szint = value;
+                    this.eletero = this.MaxEletero;
                 }
             }
         }
-        public int Tapasztalat {
-            get => tapasztalat;
-            set {
+        public int Tapasztalat
+        {
+            get => this.tapasztalat;
+            set
+            {
+                this.tapasztalat = value;
                 if (Szintlepeshez <= this.tapasztalat)
                 {
                     Szint++;
                 }
             }
         }
-        public int Eletero {
+        public int Eletero
+        {
             get => eletero;
             set
             {
-                if (this.Eletero == 0){ this.tapasztalat = 0; }
+                if (this.Eletero <= 0) { this.tapasztalat = 0; this.eletero = 0; }
                 else if (this.Eletero > this.MaxEletero) { this.Eletero = this.MaxEletero; }
+                else { this.eletero = value; }
             }
         }
         public int Sebzes { get => alapSebzes + szint; }
         public int Szintlepeshez { get => 10 + szint * 5; }
         public int MaxEletero { get => alapEletero + szint * 3; }
-        public void Megkuzd(Harcos masikHarcos) {
+        public void Megkuzd(Harcos masikHarcos)
+        {
             if (this == masikHarcos)
             {
                 Console.WriteLine("A két harcos azonos");
@@ -81,14 +88,17 @@ namespace HarcosProjekt
             }
             else
             {
-                masikHarcos.Eletero -= this.Sebzes;
-                if (masikHarcos.Eletero>0){ this.Eletero -= masikHarcos.Sebzes; }
-                masikHarcos.Tapasztalat += masikHarcos.Eletero == 0 ? 0 : (this.Eletero == 0) ? 15 : 10;
-                this.Tapasztalat += this.Eletero == 0 ? 0 : (masikHarcos.Eletero == 0) ? 15 : 10;
+                if (this.Eletero > 0) { masikHarcos.Eletero -= this.Sebzes; }
+                if (masikHarcos.Eletero > 0) { this.Eletero -= masikHarcos.Sebzes; }
+                masikHarcos.Tapasztalat += masikHarcos.Eletero <= 0 ? 0 : (this.Eletero == 0) ? 15 : 5;
+                this.Tapasztalat += this.Eletero <= 0 ? 0 : (masikHarcos.Eletero == 0) ? 15 : 5;
+                masikHarcos.Eletero += 0;
+                this.Eletero += 0;
 
             }
         }
-        public void Gyogyul() {
+        public void Gyogyul()
+        {
             if (this.Eletero == 0) { this.Eletero = MaxEletero; }
             else { this.Eletero = 3 + Szint; }
         }
