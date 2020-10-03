@@ -32,16 +32,31 @@ namespace HarcosProjekt
                 exit = nev != "";
                 exit = exit && Int32.TryParse(beSzam, out szam);
                 exit = exit && (szam > 0 && szam < 4);
-                
+
             } while (!exit);
             return new Harcos(nev, szam);
         }
         static void Kiir()
         {
-            Console.Clear();
             for (int i = 0; i < tagok.Count; i++)
             {
-                Console.WriteLine("["+(i+1)+".]...."+tagok[i]);
+                Console.WriteLine("[" + (i + 1) + ".]...." + tagok[i]);
+            }
+        }
+        static void Menu() {
+            ConsoleKeyInfo billentyu;
+            do
+            {
+                Console.WriteLine("Menu\n".ToUpper());
+                Console.WriteLine("a.) Megküzdeni egy harcossal\nb.) Gyógyulni\nc.) Kilépni");
+                Console.Write("\nMit szeretne tenni?\nÜsse le a megfelelő billentyűt: ");
+                billentyu = Console.ReadKey();
+                Console.WriteLine("\n");
+            } while (!(billentyu.Key == ConsoleKey.A || billentyu.Key == ConsoleKey.B || billentyu.Key == ConsoleKey.C));
+
+            if (billentyu.Key == ConsoleKey.A)
+            {
+                Kiir();
             }
         }
         static void Main(string[] args)
@@ -50,7 +65,11 @@ namespace HarcosProjekt
             Beolvas("harcosok.csv");
             Kiir();
             tagok.Add(userCreat());
+            Console.Clear();
             Kiir();
+            Console.ReadKey();
+            Console.Clear();
+            Menu();
         }
     }
 }
