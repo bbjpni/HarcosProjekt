@@ -36,16 +36,21 @@ namespace HarcosProjekt
             } while (!exit);
             return new Harcos(nev, szam);
         }
+        static void Kiir()
+        {
+            Console.Clear();
+            for (int i = 0; i < tagok.Count; i++)
+            {
+                Console.WriteLine("["+(i+1)+".]...."+tagok[i]);
+            }
+        }
         static void Main(string[] args)
         {
             tagok = new List<Harcos>() { new Harcos("ZOLTÁÁN", 2), new Harcos("OSzablcs", 1), new Harcos("Zsombor", 3) };
             Beolvas("harcosok.csv");
-            for (int i = 0; i < tagok.Count; i++)
-            {
-                Console.WriteLine(tagok[i]);
-            }
+            Kiir();
             tagok.Add(userCreat());
-            Console.WriteLine("\n"+tagok[tagok.Count-1]);
+            Kiir();
         }
     }
 }
