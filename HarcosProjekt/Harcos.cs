@@ -66,10 +66,9 @@ namespace HarcosProjekt
         {
             get => eletero;
             set
-            {
-                if (this.Eletero <= 0) { this.tapasztalat = 0; this.eletero = 0; }
-                else if (this.Eletero > this.MaxEletero) { this.Eletero = this.MaxEletero; }
-                else { this.eletero = value; }
+            {   this.eletero = value;
+                if (this.eletero == 0) { this.tapasztalat = 0; }
+                else if (this.eletero > this.MaxEletero) { this.eletero = this.MaxEletero; }
             }
         }
         public int Sebzes { get => alapSebzes + szint; }
@@ -90,17 +89,15 @@ namespace HarcosProjekt
             {
                 if (this.Eletero > 0) { masikHarcos.Eletero -= this.Sebzes; }
                 if (masikHarcos.Eletero > 0) { this.Eletero -= masikHarcos.Sebzes; }
+                masikHarcos.Eletero += masikHarcos.Eletero < 0 ? (-1 * masikHarcos.Eletero) : 0;
+                this.Eletero += this.Eletero < 0 ? (-1 * this.Eletero) : 0;
                 masikHarcos.Tapasztalat += masikHarcos.Eletero <= 0 ? 0 : (this.Eletero == 0) ? 15 : 5;
-                this.Tapasztalat += this.Eletero <= 0 ? 0 : (masikHarcos.Eletero == 0) ? 15 : 5;
-                masikHarcos.Eletero += 0;
-                this.Eletero += 0;
-
+                Tapasztalat += this.Eletero <= 0 ? 0 : (masikHarcos.Eletero == 0) ? 15 : 5;
             }
         }
         public void Gyogyul()
         {
-            if (this.Eletero == 0) { this.Eletero = MaxEletero; }
-            else { this.Eletero = 3 + Szint; }
+            Eletero += Eletero == 0 ? MaxEletero : 3 + Szint; 
         }
         public override string ToString()
         {
