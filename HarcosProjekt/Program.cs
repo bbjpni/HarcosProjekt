@@ -73,7 +73,10 @@ namespace HarcosProjekt
                 }
                 else if (billentyu.Key == ConsoleKey.B)
                 {
-                    Console.Clear();
+                    Console.WriteLine("\n"+tagok[tagok.Count - 1].Nev + " > gyógyul...");
+                    tagok[tagok.Count - 1].Gyogyul();
+                    Console.WriteLine(tagok[tagok.Count - 1]);
+
                 }
                 else if(billentyu.Key != ConsoleKey.C)
                 {
